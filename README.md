@@ -9,3 +9,5 @@ Easy app to edit danser settings and launch properties
 4. In cmd write:"pip install pyside6" or "easy_install install pyside6"
 5. Unarchive all ".py" and ".png" files into danser's directory
 6. Run "danser.py"
+
+![image](![image](https://user-images.githubusercontent.com/69044246/124391950-cd0cc400-dcfb-11eb-9be4-5b5ed0404556.png))
