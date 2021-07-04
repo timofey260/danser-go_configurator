@@ -1,5 +1,5 @@
-# dancer_configurator
-easy app to edit danser settings and launch properties
+# dancer-go_configurator
+Easy app to edit danser settings and launch properties
 
 ##Install steps
 
