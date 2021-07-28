@@ -3,14 +3,14 @@
 ################################################################################
 ## Form generated from reading UI file 'danser.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.0.1
+## Created by: Qt User Interface Compiler version 6.1.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import *
-from PySide6.QtGui import *
-from PySide6.QtWidgets import *
+from PySide6.QtCore import *  # type: ignore
+from PySide6.QtGui import *  # type: ignore
+from PySide6.QtWidgets import *  # type: ignore
 
 
 class Ui_Dialog(object):
@@ -62,6 +62,42 @@ class Ui_Dialog(object):
         self.usepersistentbuffers = QCheckBox(self.tab_18)
         self.usepersistentbuffers.setObjectName(u"usepersistentbuffers")
         self.usepersistentbuffers.setGeometry(QRect(10, 70, 141, 20))
+        self.label_46 = QLabel(self.tab_18)
+        self.label_46.setObjectName(u"label_46")
+        self.label_46.setGeometry(QRect(200, 40, 41, 21))
+        self.width = QSpinBox(self.tab_18)
+        self.width.setObjectName(u"width")
+        self.width.setGeometry(QRect(250, 10, 121, 22))
+        self.width.setMaximum(1920)
+        self.width.setSingleStep(10)
+        self.width.setValue(1920)
+        self.label_47 = QLabel(self.tab_18)
+        self.label_47.setObjectName(u"label_47")
+        self.label_47.setGeometry(QRect(200, 10, 41, 21))
+        self.height = QSpinBox(self.tab_18)
+        self.height.setObjectName(u"height")
+        self.height.setGeometry(QRect(250, 40, 121, 21))
+        self.height.setMaximum(1080)
+        self.height.setSingleStep(10)
+        self.height.setValue(1080)
+        self.label_48 = QLabel(self.tab_18)
+        self.label_48.setObjectName(u"label_48")
+        self.label_48.setGeometry(QRect(380, 40, 81, 21))
+        self.winwidth = QSpinBox(self.tab_18)
+        self.winwidth.setObjectName(u"winwidth")
+        self.winwidth.setGeometry(QRect(470, 10, 121, 22))
+        self.winwidth.setMaximum(1920)
+        self.winwidth.setSingleStep(10)
+        self.winwidth.setValue(1920)
+        self.winheight = QSpinBox(self.tab_18)
+        self.winheight.setObjectName(u"winheight")
+        self.winheight.setGeometry(QRect(470, 40, 121, 21))
+        self.winheight.setMaximum(1080)
+        self.winheight.setSingleStep(10)
+        self.winheight.setValue(1080)
+        self.label_49 = QLabel(self.tab_18)
+        self.label_49.setObjectName(u"label_49")
+        self.label_49.setGeometry(QRect(380, 10, 81, 21))
         self.settings.addTab(self.tab_18, "")
         self.tab_17 = QWidget()
         self.tab_17.setObjectName(u"tab_17")
@@ -744,6 +780,40 @@ class Ui_Dialog(object):
         self.ppcounterscale.setGeometry(QRect(60, 20, 61, 22))
         self.ppcounterscale.setMinimum(1)
         self.ppcounterscale.setMaximum(5)
+        self.ppxpos = QSpinBox(self.tab_12)
+        self.ppxpos.setObjectName(u"ppxpos")
+        self.ppxpos.setGeometry(QRect(50, 30, 121, 22))
+        self.ppxpos.setMaximum(1920)
+        self.ppxpos.setSingleStep(10)
+        self.ppxpos.setValue(5)
+        self.label_44 = QLabel(self.tab_12)
+        self.label_44.setObjectName(u"label_44")
+        self.label_44.setGeometry(QRect(10, 30, 31, 21))
+        self.label_45 = QLabel(self.tab_12)
+        self.label_45.setObjectName(u"label_45")
+        self.label_45.setGeometry(QRect(10, 60, 31, 21))
+        self.ppypos = QSpinBox(self.tab_12)
+        self.ppypos.setObjectName(u"ppypos")
+        self.ppypos.setGeometry(QRect(50, 60, 121, 21))
+        self.ppypos.setMaximum(1080)
+        self.ppypos.setSingleStep(10)
+        self.ppypos.setValue(150)
+        self.ppalign = QComboBox(self.tab_12)
+        self.ppalign.addItem("")
+        self.ppalign.addItem("")
+        self.ppalign.addItem("")
+        self.ppalign.addItem("")
+        self.ppalign.addItem("")
+        self.ppalign.addItem("")
+        self.ppalign.addItem("")
+        self.ppalign.addItem("")
+        self.ppalign.addItem("")
+        self.ppalign.setObjectName(u"ppalign")
+        self.ppalign.setGeometry(QRect(220, 10, 81, 22))
+        self.ppalign.setEditable(False)
+        self.label_50 = QLabel(self.tab_12)
+        self.label_50.setObjectName(u"label_50")
+        self.label_50.setGeometry(QRect(180, 10, 31, 21))
         self.overlay.addTab(self.tab_12, "")
         self.tab_13 = QWidget()
         self.tab_13.setObjectName(u"tab_13")
@@ -955,8 +1025,8 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
 
-        self.settings.setCurrentIndex(1)
-        self.overlay.setCurrentIndex(8)
+        self.settings.setCurrentIndex(0)
+        self.overlay.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(Dialog)
@@ -973,6 +1043,10 @@ class Ui_Dialog(object):
         self.label_36.setText(QCoreApplication.translate("Dialog", u"FPS cap", None))
         self.label_37.setText(QCoreApplication.translate("Dialog", u"MSAA", None))
         self.usepersistentbuffers.setText(QCoreApplication.translate("Dialog", u"Use persistent buffers", None))
+        self.label_46.setText(QCoreApplication.translate("Dialog", u"Height", None))
+        self.label_47.setText(QCoreApplication.translate("Dialog", u"Width", None))
+        self.label_48.setText(QCoreApplication.translate("Dialog", u"Window height", None))
+        self.label_49.setText(QCoreApplication.translate("Dialog", u"Window width", None))
         self.settings.setTabText(self.settings.indexOf(self.tab_18), QCoreApplication.translate("Dialog", u"Graphics", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("Dialog", u"Colors", None))
         self.enablerainbow.setText(QCoreApplication.translate("Dialog", u"Rainbow", None))
@@ -1146,6 +1220,19 @@ class Ui_Dialog(object):
         self.other_5.setTitle(QCoreApplication.translate("Dialog", u"Other", None))
         self.label_64.setText(QCoreApplication.translate("Dialog", u"Opacity", None))
         self.label_65.setText(QCoreApplication.translate("Dialog", u"Scale", None))
+        self.label_44.setText(QCoreApplication.translate("Dialog", u"Xpos", None))
+        self.label_45.setText(QCoreApplication.translate("Dialog", u"Ypos", None))
+        self.ppalign.setItemText(0, QCoreApplication.translate("Dialog", u"CenterLeft", None))
+        self.ppalign.setItemText(1, QCoreApplication.translate("Dialog", u"CenterRight", None))
+        self.ppalign.setItemText(2, QCoreApplication.translate("Dialog", u"Center", None))
+        self.ppalign.setItemText(3, QCoreApplication.translate("Dialog", u"UpCenter", None))
+        self.ppalign.setItemText(4, QCoreApplication.translate("Dialog", u"DownCenter", None))
+        self.ppalign.setItemText(5, QCoreApplication.translate("Dialog", u"UpLeft", None))
+        self.ppalign.setItemText(6, QCoreApplication.translate("Dialog", u"DownLeft", None))
+        self.ppalign.setItemText(7, QCoreApplication.translate("Dialog", u"UpRight", None))
+        self.ppalign.setItemText(8, QCoreApplication.translate("Dialog", u"DownRight", None))
+
+        self.label_50.setText(QCoreApplication.translate("Dialog", u"Align", None))
         self.overlay.setTabText(self.overlay.indexOf(self.tab_12), QCoreApplication.translate("Dialog", u"PPCounter", None))
         self.keyoverlay.setText(QCoreApplication.translate("Dialog", u"KeyOverlay", None))
         self.other.setTitle(QCoreApplication.translate("Dialog", u"Other", None))

@@ -41,6 +41,10 @@ def modss():
         return False
 
 
+def coninfirm():
+    file(widget)
+
+
 def text():
     level = ""
     if widget.author.isChecked():
@@ -52,9 +56,9 @@ def text():
     if widget.difficulty.isChecked():
         level += " -d=\"" + widget.difficultyc.text() + "\""
     if widget.tag.isChecked():
-        level += " -tag=\"" + widget.tagc.value() + "\""
+        level += " -tag=" + str(widget.tagc.value())
     if widget.cursors.isChecked():
-        level += " -tag=\"" + widget.cursorsc.value() + "\""
+        level += " -cursors=" + str(widget.cursorsc.value())
 
     if widget.knockout.isChecked():  # knockout mods
         mods = ""
@@ -127,92 +131,52 @@ def nf():
         widget.sdpf.setChecked(False)
     text()
 
+def checked(argument, arguments, invert: bool = True):
+    if type(arguments) != list:
+        arguments = [arguments]
+    if not invert:
+        if argument.isChecked():
+            for ar in arguments:
+                ar.setDisabled(True)
+        else:
+            for ar in arguments:
+                ar.setDisabled(False)
+    else:
+        if not argument.isChecked():
+            for ar in arguments:
+                ar.setDisabled(True)
+        else:
+            for ar in arguments:
+                ar.setDisabled(False)
 
 def test():
-    if not widget.bloom.isChecked():
-        widget.bloomtobeat.setDisabled(True)
-        widget.bloomtobeatadd.setDisabled(True)
-        widget.bloompower.setDisabled(True)
-        widget.bloomblur.setDisabled(True)
-        widget.bloomthreshold.setDisabled(True)
-    else:
-        widget.bloomtobeat.setDisabled(False)
-        widget.bloomtobeatadd.setDisabled(False)
-        widget.bloompower.setDisabled(False)
-        widget.bloomblur.setDisabled(False)
-        widget.bloomthreshold.setDisabled(False)
-    if not widget.blur.isChecked():
-        widget.blurintro.setDisabled(True)
-        widget.blurnormal.setDisabled(True)
-        widget.blurbreaks.setDisabled(True)
-    else:
-        widget.blurintro.setDisabled(False)
-        widget.blurnormal.setDisabled(False)
-        widget.blurbreaks.setDisabled(False)
-    if not widget.triangles.isChecked():
-        widget.trianglesscale.setDisabled(True)
-        widget.trianglesspeed.setDisabled(True)
-        widget.trianglesshadow.setDisabled(True)
-        widget.trianglesparalaxmultiplier.setDisabled(True)
-        widget.trianglesdrawoverblur.setDisabled(True)
-        widget.trianglesdensity.setDisabled(True)
-    else:
-        widget.trianglesscale.setDisabled(False)
-        widget.trianglesspeed.setDisabled(False)
-        widget.trianglesshadow.setDisabled(False)
-        widget.trianglesparalaxmultiplier.setDisabled(False)
-        widget.trianglesdrawoverblur.setDisabled(False)
-        widget.trianglesdensity.setDisabled(False)
+    checked(widget.bloom, [widget.bloomtobeat, widget.bloomtobeatadd, widget.bloompower, widget.bloomblur,
+                           widget.bloomthreshold])
+    checked(widget.blur, [widget.blurintro, widget.blurnormal, widget.blurbreaks])
+    checked(widget.triangles, [widget.trianglesscale, widget.trianglesspeed, widget.trianglesshadow,
+        widget.trianglesparalaxmultiplier, widget.trianglesdrawoverblur, widget.trianglesdensity])
+    checked(widget.knockout, widget.modlist)
 
-    if not widget.knockout.isChecked():  # mod list
-        widget.modlist.setDisabled(True)
-    else:
-        widget.modlist.setDisabled(False)
-    if not widget.start.isChecked():  # timing
-        widget.starts.setDisabled(True)
-    else:
-        widget.starts.setDisabled(False)
-    if not widget.end.isChecked():
-        widget.ends.setDisabled(True)
-    else:
-        widget.ends.setDisabled(False)
+    checked(widget.start, widget.starts)  # timing
+    checked(widget.end, widget.ends)
 
-    if widget.vsync.isChecked():  # vsync
-        widget.fpscap.setDisabled(True)
-    else:
-        widget.fpscap.setDisabled(False)
+    checked(widget.vsync, widget.fpscap, False)
 
-    if not widget.difficulty.isChecked():
-        widget.difficultyc.setDisabled(True)
-    else:
-        widget.difficultyc.setDisabled(False)
-    if not widget.author.isChecked():
-        widget.authorc.setDisabled(True)
-    else:
-        widget.authorc.setDisabled(False)
-    if not widget.title.isChecked():
-        widget.titlec.setDisabled(True)
-    else:
-        widget.titlec.setDisabled(False)
-    if not widget.creator.isChecked():
-        widget.creatorc.setDisabled(True)
-    else:
-        widget.creatorc.setDisabled(False)
-    if not widget.cursors.isChecked():
-        widget.cursorsc.setDisabled(True)
-    else:
-        widget.cursorsc.setDisabled(False)
-    if not widget.tag.isChecked():
-        widget.tagc.setDisabled(True)
-    else:
-        widget.tagc.setDisabled(False)
+    checked(widget.difficulty, widget.difficultyc)  # launch
+    checked(widget.author, widget.authorc)
+    checked(widget.title, widget.titlec)
+    checked(widget.creator, widget.creatorc)
+    checked(widget.cursors, widget.cursorsc)
+    checked(widget.tag, widget.tagc)
+
+    checked(widget.fullscreenbutton, [widget.winwidth, widget.winheight])
 
 
 test()
 # code
 # buttons
 widget.exit.clicked.connect(bp)
-widget.coinfirm.clicked.connect(file(widget))
+widget.coinfirm.clicked.connect(coninfirm)
 widget.play.clicked.connect(play)
 
 widget.bloom.clicked.connect(test)
@@ -251,10 +215,6 @@ widget.knockout.clicked.connect(text)
 widget.fl.clicked.connect(text)
 widget.ezhr.clicked.connect(text)
 widget.hdfi.clicked.connect(text)
-widget.ht.clicked.connect(text)
-widget.dtnc.clicked.connect(text)
-widget.sdpf.clicked.connect(text)
-widget.nf.clicked.connect(text)
 # start&end
 widget.start.clicked.connect(text)
 widget.end.clicked.connect(text)
@@ -266,5 +226,8 @@ widget.dtnc.clicked.connect(dtnc)
 widget.sdpf.clicked.connect(sdpf)
 widget.nf.clicked.connect(nf)
 
+# resolution
+widget.fullscreenbutton.clicked.connect(test)
+
 # exit
-sys.exit(app.exec_())
+sys.exit(app.exec())
