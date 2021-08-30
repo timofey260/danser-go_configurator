@@ -1,439 +1,210 @@
-def booltostr(r: bool):
-    if r:
-        return "true"
-    else:
-        return "false"
+import json
+
+name = ''
+g = {}
+
+
+def new(n: str, p):
+    global g, name
+    name = n
+    g = p[name]
+
+
+def close(p):
+    global name
+    p[name] = g
 
 
 def file(widget):
-    with open("settings.json", "w") as f:
-        f.write(
-            '{\n'
-            '	"General": {\n'
-            f'		"OsuSongsDir": "{widget.songs.text()}",\n'
-            f'		"OsuSkinsDir": "{widget.skins.text()}",\n'
-            '		"DiscordPresenceOn": true,\n'
-            '		"UnpackOszFiles": true\n'
-            '	},\n'
-            '	"Graphics": {\n'
-            f'		"Width": {widget.width.value()},\n'
-            f'		"Height": {widget.height.value()},\n'
-            f'		"WindowWidth": {widget.winwidth.value()},\n'
-            f'		"WindowHeight": {widget.winheight.value()},\n'
-            f'		"Fullscreen": {booltostr(widget.fullscreenbutton.isChecked())},\n'
-            f'		"VSync": {booltostr(widget.vsync.isChecked())},\n'
-            f'		"FPSCap": {widget.fpscap.value()},\n'
-            f'		"MSAA": {widget.msaa.value()},\n'
-            f'		"ShowFPS": {booltostr(widget.showfps.isChecked())},\n'
-            '		"Experimental": {\n'
-            f'			"UsePersistentBuffers": {booltostr(widget.usepersistentbuffers.isChecked())}\n'
-            '		}\n'
-            '	},\n'
-            '	"Audio": {\n'
-            f'		"GeneralVolume": {widget.generalvolume.value()},\n'
-            f'		"MusicVolume": {widget.musicvolume.value()},\n'
-            f'		"SampleVolume": {widget.samplevolume.value()},\n'
-            f'		"Offset": {widget.offset.value()},\n'
-            f'		"HitsoundPositionMultiplier": {widget.positionmultiplier.value()},\n'
-            f'		"IgnoreBeatmapSamples": {booltostr(widget.ignoresamples.isChecked())},\n'
-            f'		"IgnoreBeatmapSampleVolume": {booltostr(widget.ignoresamplevolume.isChecked())},\n'
-            f'		"BeatScale": {widget.audiobeatscale.value()},\n'
-            f'		"BeatUseTimingPoints": {booltostr(widget.usingtimingpoints.isChecked())},\n'
-            '		"Linux/Unix": {\n'
-            '			"BassPlaybackBufferLength": 100,\n'
-            '			"BassDeviceBufferLength": 10,\n'
-            '			"BassUpdatePeriod": 5\n'
-            '		}\n'
-            '	},\n'
-            '	"Input": {\n'
-            f'		"LeftKey": "{widget.zkey.keySequence().toString()}",\n'
-            f'		"RightKey": "{widget.xkey.keySequence().toString()}",\n'
-            f'		"RestartKey": "{widget.rkey.keySequence().toString()}",\n'
-            f'		"SmokeKey": "{widget.ckey.keySequence().toString()}",\n'
-            f'		"MouseButtonsDisabled": {booltostr(widget.mouse.isChecked())},\n'
-            f'		"MouseHighPrecision": {booltostr(widget.mousehighprecision.isChecked())},\n'
-            f'		"MouseSensitivity": {widget.mousesensivity.value()}\n'
-            '	},\n'
-            '	"Gameplay": {\n'
-            '		"HitErrorMeter": {\n'
-            f'			"Show": {booltostr(widget.hiterrormeter.isChecked())},\n'
-            f'			"Scale": {widget.hiterrormeterscale.value()},\n'
-            f'			"Opacity": {widget.hiterrormeteropacity.value()},\n'
-            '			"ShowUnstableRate": true,\n'
-            '			"UnstableRateDecimals": 0,\n'
-            '			"UnstableRateScale": 1\n'
-            '		},\n'
-            '		"Score": {\n'
-            f'			"Show": {booltostr(widget.score.isChecked())},\n'
-            f'			"Scale": {widget.scorescale.value()},\n'
-            f'			"Opacity": {widget.scoreopacity.value()},\n'
-            '			"ProgressBar": "Pie",\n'
-            '			"ShowGradeAlways": true\n'
-            '		},\n'
-            '		"HpBar": {\n'
-            f'			"Show": {booltostr(widget.hpbar.isChecked())},\n'
-            f'			"Scale": {widget.hpbarscale.value()},\n'
-            f'			"Opacity": {widget.hpbaropacity.value()}\n'
-            '		},\n'
-            '		"ComboCounter": {\n'
-            f'			"Show": {booltostr(widget.combocounter.isChecked())},\n'
-            f'			"Scale": {widget.combocounterscale.value()},\n'
-            f'			"Opacity": {widget.combocounteropacity.value()}\n'
-            '		},\n'
-            '		"PPCounter": {\n'
-            f'			"Show": {booltostr(widget.ppcounter.isChecked())},\n'
-            f'			"Scale": {widget.ppcounterscale.value()},\n'
-            f'			"Opacity": {widget.ppcounteropacity.value()},\n'
-            f'			"XPosition": {widget.ppxpos.value()},\n'
-            f'			"YPosition": {widget.ppypos.value()},\n'
-            '			"Decimals": 0,\n'
-            f'			"Align": "{widget.ppalign.currentText()}",\n'
-            '			"ShowInResults": true\n'
-            '		},\n'
-            '		"KeyOverlay": {\n'
-            f'			"Show": {booltostr(widget.keyoverlay.isChecked())},\n'
-            f'			"Scale": {widget.keyoverlayscale.value()},\n'
-            f'			"Opacity": {widget.keyoverlayopacity.value()}\n'
-            '		},\n'
-            '		"ScoreBoard": {\n'
-            f'			"Show": {booltostr(widget.scoreboard.isChecked())},\n'
-            f'			"Scale": {widget.scoreboardscale.value()},\n'
-            f'			"Opacity": {widget.scoreboardopacity.value()},\n'
-            '			"HideOthers": false,\n'
-            '			"ShowAvatars": false,\n'
-            '			"YOffset": 0\n'
-            '		},\n'
-            '		"Mods": {\n'
-            f'			"Show": {booltostr(widget.mods.isChecked())},\n'
-            f'			"Scale": {widget.modsscale.value()},\n'
-            f'			"Opacity": {widget.modsopacity.value()},\n'
-            '			"HideInReplays": false,\n'
-            '			"FoldInReplays": false\n'
-            '		},\n'
-            '		"Boundaries": {\n'
-            f'			"Enabled": {booltostr(widget.boundaries.isChecked())},\n'
-            '			"BorderThickness": 1,\n'
-            '			"BorderFill": 1,\n'
-            '			"BorderColor": {\n'
-            '				"Hue": 0,\n'
-            '				"Saturation": 0,\n'
-            '				"Value": 1\n'
-            '			},\n'
-            '			"BorderOpacity": 1,\n'
-            '			"BackgroundColor": {\n'
-            '				"Hue": 0,\n'
-            '				"Saturation": 1,\n'
-            '				"Value": 0\n'
-            '			},\n'
-            '			"BackgroundOpacity": 0.5\n'
-            '		},\n'
-            f'		"ShowResultsScreen": {booltostr(widget.resultscreen.isChecked())},\n'
-            f'		"ResultsScreenTime": {widget.resultscreentime.value()},\n'
-            f'		"ShowWarningArrows": {booltostr(widget.warningerrors.isChecked())},\n'
-            f'		"FlashlightDim": {widget.flashlightdim.value()},\n'
-            f'	    "PlayUsername": "{widget.playername.text()}"\n'
-            '	},\n'
-            '	"Skin": {\n'
-            f'		"CurrentSkin": "{widget.skin.text()}",\n'
-            f'		"UseColorsFromSkin": {booltostr(widget.colorsfromskin.isChecked())},\n'
-            f'		"UseBeatmapColors": {booltostr(widget.beatmapcolors.isChecked())},\n'
-            '		"Cursor": {\n'
-            f'			"UseSkinCursor": {booltostr(widget.skincursor.isChecked())},\n'
-            f'			"Scale": {widget.cursorscale.value()},\n'
-            '			"ForceLongTrail": false,\n'
-            '			"LongTrailLength": 2048,\n'
-            '			"LongTrailDensity": 1\n'
-            '		}\n'
-            '	},\n'
-            '	"Cursor": {\n'
-            f'		"TrailStyle": {widget.trailstyle.value()},\n'
-            f'		"Style23Speed": {widget.style23speed.value()},\n'
-            '		"Style4Shift": 0.5,\n'
-            '		"Colors": {\n'
-            '			"EnableRainbow": true,\n'
-            '			"RainbowSpeed": 8,\n'
-            '			"BaseColor": {\n'
-            '				"Hue": 0,\n'
-            '				"Saturation": 1,\n'
-            '				"Value": 1\n'
-            '			},\n'
-            '			"EnableCustomHueOffset": false,\n'
-            '			"HueOffset": 0,\n'
-            '			"FlashToTheBeat": false,\n'
-            '			"FlashAmplitude": 0\n'
-            '		},\n'
-            '		"EnableCustomTagColorOffset": true,\n'
-            '		"TagColorOffset": -36,\n'
-            '		"EnableTrailGlow": true,\n'
-            '		"EnableCustomTrailGlowOffset": true,\n'
-            '		"TrailGlowOffset": -36,\n'
-            '		"ScaleToCS": false,\n'
-            '		"CursorSize": 18,\n'
-            '		"CursorExpand": false,\n'
-            '		"ScaleToTheBeat": true,\n'
-            '		"ShowCursorsOnBreaks": true,\n'
-            '		"BounceOnEdges": true,\n'
-            '		"TrailScale": 1,\n'
-            '		"TrailEndScale": 0.4,\n'
-            '		"TrailDensity": 0.5,\n'
-            '		"TrailMaxLength": 2000,\n'
-            '		"TrailRemoveSpeed": 1,\n'
-            '		"GlowEndScale": 0.4,\n'
-            '		"InnerLengthMult": 0.9,\n'
-            '		"AdditiveBlending": true,\n'
-            '		"CursorRipples": true,\n'
-            '		"SmokeEnabled": true\n'
-            '	},\n'
-            '	"Objects": {\n'
-            '		"DrawApproachCircles": true,\n'
-            '		"DrawComboNumbers": true,\n'
-            '		"DrawFollowPoints": true,\n'
-            '		"LoadSpinners": true,\n'
-            '		"ScaleToTheBeat": false,\n'
-            '		"StackEnabled": true,\n'
-            '		"Sliders": {\n'
-            '			"ForceSliderBallTexture": true,\n'
-            '			"DrawEndCircles": true,\n'
-            '			"DrawSliderFollowCircle": true,\n'
-            '			"DrawScorePoints": true,\n'
-            '			"SliderMerge": false,\n'
-            '			"SliderDistortions": true,\n'
-            '			"BorderWidth": 1,\n'
-            '			"Quality": {\n'
-            '				"CircleLevelOfDetail": 50,\n'
-            '				"PathLevelOfDetail": 50\n'
-            '			},\n'
-            '			"Snaking": {\n'
-            '				"In": true,\n'
-            '				"Out": true,\n'
-            '				"DurationMultiplier": 0,\n'
-            '				"FadeMultiplier": 0\n'
-            '			}\n'
-            '		},\n'
-            '		"Colors": {\n'
-            '			"MandalaTexturesTrigger": 5,\n'
-            '			"MandalaTexturesAlpha": 0.3,\n'
-            '			"Color": {\n'
-            '				"EnableRainbow": true,\n'
-            '				"RainbowSpeed": 8,\n'
-            '				"BaseColor": {\n'
-            '					"Hue": 0,\n'
-            '					"Saturation": 1,\n'
-            '					"Value": 1\n'
-            '				},\n'
-            '				"EnableCustomHueOffset": false,\n'
-            '				"HueOffset": 0,\n'
-            '				"FlashToTheBeat": false,\n'
-            '				"FlashAmplitude": 100\n'
-            '			},\n'
-            '			"UseComboColors": false,\n'
-            '			"ComboColors": [\n'
-            '				{\n'
-            '					"Hue": 0,\n'
-            '					"Saturation": 1,\n'
-            '					"Value": 1\n'
-            '				}\n'
-            '			],\n'
-            '			"UseSkinComboColors": false,\n'
-            '			"UseBeatmapComboColors": false,\n'
-            '			"Sliders": {\n'
-            '				"WhiteScorePoints": true,\n'
-            '				"ScorePointColorOffset": 0,\n'
-            '				"SliderBallTint": false,\n'
-            '				"Border": {\n'
-            '					"UseHitCircleColor": false,\n'
-            '					"Color": {\n'
-            '						"EnableRainbow": false,\n'
-            '						"RainbowSpeed": 8,\n'
-            '						"BaseColor": {\n'
-            '							"Hue": 0,\n'
-            '							"Saturation": 0,\n'
-            '							"Value": 1\n'
-            '						},\n'
-            '						"EnableCustomHueOffset": false,\n'
-            '						"HueOffset": 0,\n'
-            '						"FlashToTheBeat": false,\n'
-            '						"FlashAmplitude": 100\n'
-            '					},\n'
-            '					"EnableCustomGradientOffset": true,\n'
-            '					"CustomGradientOffset": 0\n'
-            '				},\n'
-            '				"Body": {\n'
-            '					"UseHitCircleColor": true,\n'
-            '					"Color": {\n'
-            '						"EnableRainbow": false,\n'
-            '						"RainbowSpeed": 8,\n'
-            '						"BaseColor": {\n'
-            '							"Hue": 0,\n'
-            '							"Saturation": 1,\n'
-            '							"Value": 0\n'
-            '						},\n'
-            '						"EnableCustomHueOffset": false,\n'
-            '						"HueOffset": 0,\n'
-            '						"FlashToTheBeat": true,\n'
-            '						"FlashAmplitude": 100\n'
-            '					},\n'
-            '					"InnerOffset": -0.5,\n'
-            '					"OuterOffset": -0.05,\n'
-            '					"InnerAlpha": 0.8,\n'
-            '					"OuterAlpha": 0.8\n'
-            '				}\n'
-            '			}\n'
-            '		}\n'
-            '	},\n'
-            '	"Playfield": {\n'
-            '		"DrawObjects": true,\n'
-            '		"DrawCursors": true,\n'
-            '		"Scale": 1,\n'
-            '		"OsuShift": true,\n'
-            '		"ShiftY": 0,\n'
-            '		"ShiftX": 0,\n'
-            '		"ScaleStoryboardWithPlayfield": true,\n'
-            '		"LeadInTime": 5,\n'
-            '		"LeadInHold": 2,\n'
-            '		"FadeOutTime": 5,\n'
-            '		"SeizureWarning": {\n'
-            '			"Enabled": true,\n'
-            '			"Duration": 5\n'
-            '		},\n'
-            '		"Background": {\n'
-            f'			"LoadStoryboards": {booltostr(widget.loadstoryboards.isChecked())},\n'
-            f'			"LoadVideos": {booltostr(widget.loadvideos.isChecked())},\n'
-            f'			"FlashToTheBeat": {booltostr(widget.flashtobeat.isChecked())},\n'
-            '			"Dim": {\n'
-            f'				"Intro": {widget.dimintro.value()},\n'
-            f'				"Normal": {widget.dimnormal.value()},\n'
-            f'				"Breaks": {widget.dimbreaks.value()}\n'
-            '			},\n'
-            '			"Parallax": {\n'
-            f'				"Amount": {widget.paralaxamount.value()},\n'
-            f'				"Speed": {widget.paralaxspeed.value()}\n'
-            '			},\n'
-            '			"Blur": {\n'
-            f'				"Enabled": {booltostr(widget.blur.isChecked())},\n'
-            '				"Values": {\n'
-            f'					"Intro": {widget.blurintro.value()},\n'
-            f'					"Normal": {widget.blurnormal.value()},\n'
-            f'					"Breaks": {widget.blurbreaks.value()}\n'
-            '				}\n'
-            '			},\n'
-            '			"Triangles": {\n'
-            f'				"Enabled": {booltostr(widget.triangles.isChecked())},\n'
-            f'				"Shadowed": {booltostr(widget.trianglesshadow.isChecked())},\n'
-            f'				"DrawOverBlur": {booltostr(widget.trianglesdrawoverblur.isChecked())},\n'
-            f'				"ParallaxMultiplier": {widget.trianglesparalaxmultiplier.value()},\n'
-            f'				"Density": {widget.trianglesdensity.value()},\n'
-            f'				"Scale": {widget.trianglesscale.value()},\n'
-            f'				"Speed": {widget.trianglesspeed.value()}\n'
-            '			}\n'
-            '		},\n'
-            '		"Logo": {\n'
-            f'			"DrawSpectrum": {booltostr(widget.drawspectrum.isChecked())},\n'
-            '			"Dim": {\n'
-            f'				"Intro": {widget.drawspectrumintro.value()},\n'
-            f'				"Normal": {widget.drawspectrumnormal.value()},\n'
-            f'				"Breaks": {widget.drawspectrumbreaks.value()}\n'
-            '			}\n'
-            '		},\n'
-            '		"Bloom": {\n'
-            f'			"Enabled": {booltostr(widget.bloom.isChecked())},\n'
-            f'			"BloomToTheBeat": {booltostr(widget.bloomtobeat.isChecked())},\n'
-            f'			"BloomBeatAddition": {widget.bloomtobeatadd.value()},\n'
-            f'			"Threshold": {widget.bloomthreshold.value()},\n'
-            f'			"Blur": {widget.bloomblur.value()},\n'
-            f'			"Power": {widget.bloompower.value()}\n'
-            '		}\n'
-            '	},\n'
-            '	"Dance": {\n'
-            '		"Movers": [\n'
-            '		"spline"\n'
-            '		],\n'
-            '		"Spinners": [\n'
-            '		"circle"\n'
-            '		],\n'
-            '		"DoSpinnersTogether": true,\n'
-            '		"SpinnerRadius": 100,\n'
-            '		"Battle": false,\n'
-            '		"SliderDance": false,\n'
-            '		"RandomSliderDance": false,\n'
-            '		"TAGSliderDance": true,\n'
-            '		"Bezier": {\n'
-            '			"Aggressiveness": 60,\n'
-            '			"SliderAggressiveness": 3\n'
-            '		},\n'
-            '		"Flower": {\n'
-            '			"AngleOffset": 90,\n'
-            '			"DistanceMult": 0.666,\n'
-            '			"StreamAngleOffset": 90,\n'
-            '			"LongJump": -1,\n'
-            '			"LongJumpMult": 0.7,\n'
-            '			"LongJumpOnEqualPos": false\n'
-            '		},\n'
-            '		"HalfCircle": {\n'
-            '			"RadiusMultiplier": 1,\n'
-            '			"StreamTrigger": 130\n'
-            '		},\n'
-            '		"Spline": {\n'
-            '			"RotationalForce": false,\n'
-            '			"StreamHalfCircle": true,\n'
-            '			"StreamWobble": true,\n'
-            '			"WobbleScale": 0.67\n'
-            '		},\n'
-            '		"Momentum": {\n'
-            '			"SkipStackAngles": false,\n'
-            '			"StreamRestrict": true,\n'
-            '			"DurationMult": 2,\n'
-            '			"DurationTrigger": 500,\n'
-            '			"StreamMult": 0.7,\n'
-            '			"RestrictAngle": 90,\n'
-            '			"RestrictArea": 40,\n'
-            '			"RestrictInvert": true,\n'
-            '			"DistanceMult": 0.6,\n'
-            '			"DistanceMultOut": 0.45\n'
-            '		},\n'
-            '		"ExGon": {\n'
-            '			"Delay": 50\n'
-            '		}\n'
-            '	},\n'
-            '	"Knockout": {\n'
-            '		"Mode": 0,\n'
-            '		"ExcludeMods": "",\n'
-            '		"HideMods": "",\n'
-            '		"MaxPlayers": 50,\n'
-            '		"BubbleMinimumCombo": 200,\n'
-            '		"RevivePlayersAtEnd": true,\n'
-            '		"LiveSort": false,\n'
-            '		"SortBy": "Score",\n'
-            '		"MinCursorSize": 3,\n'
-            '		"MaxCursorSize": 7,\n'
-            '		"AddDanser": true,\n'
-            '	"DanserName": "danser"\n'
-            '	},\n'
-            '	"Recording": {\n'
-            '		"FrameWidth": 1920,\n'
-            '		"FrameHeight": 1080,\n'
-            '		"FPS": 60,\n'
-            '		"Encoder": "libx264",\n'
-            '		"EncoderOptions": "-crf 14",\n'
-            '		"Profile": "high",\n'
-            '		"Preset": "faster",\n'
-            '		"PixelFormat": "yuv420p",\n'
-            '		"Filters": "",\n'
-            '		"AudioCodec": "aac",\n'
-            '		"AudioBitrate": "320k",\n'
-            '		"AudioFilters": "",\n'
-            '		"OutputDir": "F:\\\\Desktop\\\\dancer",\n'
-            '		"Container": "mp4",\n'
-            '		"MotionBlur": {\n'
-            '			"Enabled": false,\n'
-            '			"OversampleMultiplier": 3,\n'
-            '			"BlendFrames": 5,\n'
-            '			"BlendWeights": {\n'
-            '				"UseManualWeights": false,\n'
-            '				"ManualWeights": "1 1.7 2.1 4.1 5",\n'
-            '				"AutoWeightsID": 1,\n'
-            '				"GaussWeightsMult": 1.5\n'
-            '			}\n'
-            '		}\n'
-            '	}\n'
-            '}')
+    global g, name
+    i = json.loads(open("settings/default.json", "r").read())
+
+    p = i["General"]
+    p["OsuSongsDir"] = widget.songs.text()
+    p["OsuSkinsDir"] = widget.skins.text()
+    i["General"] = p
+
+    p = i["Graphics"]
+    p["Width"] = widget.width.value()
+    p["Height"] = widget.height.value()
+    p["WindowWidth"] = widget.winwidth.value()
+    p["WindowHeight"] = widget.winheight.value()
+    p["Fullscreen"] = widget.fullscreenbutton.isChecked()
+    p["VSync"] = widget.vsync.isChecked()
+    p["FPSCap"] = widget.fpscap.value()
+    p["MSAA"] = widget.msaa.value()
+    p["ShowFPS"] = widget.showfps.isChecked()
+    p["Experimental"]["UsePersistentBuffers"] = widget.usepersistentbuffers.isChecked()
+    i["Graphics"] = p
+
+    p = i["Audio"]
+    p["GeneralVolume"] = widget.generalvolume.value()
+    p["MusicVolume"] = widget.musicvolume.value()
+    p["SampleVolume"] = widget.samplevolume.value()
+    p["Offset"] = widget.offset.value()
+    p["HitsoundPositionMultiplier"] = widget.positionmultiplier.value()
+    p["IgnoreBeatmapSamples"] = widget.ignoresamples.isChecked()
+    p["IgnoreBeatmapSampleVolume"] = widget.ignoresamplevolume.isChecked()
+    p["BeatScale"] = widget.audiobeatscale.value()
+    p["BeatUseTimingPoints"] = widget.usingtimingpoints.isChecked()
+    i["Audio"] = p
+
+    p = i["Input"]
+    p["LeftKey"] = widget.zkey.keySequence().toString()
+    p["RightKey"] = widget.xkey.keySequence().toString()
+    p["RestartKey"] = widget.rkey.keySequence().toString()
+    p["SmokeKey"] = widget.ckey.keySequence().toString()
+    p["MouseButtonsDisabled"] = widget.mouse.isChecked()
+    p["MouseHighPrecision"] = widget.mousehighprecision.isChecked()
+    p["MouseSensitivity"] = widget.mousesensivity.value()
+    i["Input"] = p
+
+    p = i["Gameplay"]
+
+    p["ShowResultsScreen"] = widget.resultscreen.isChecked()
+    p["ResultsScreenTime"] = widget.resultscreentime.value()
+    p["ShowWarningArrows"] = widget.warningerrors.isChecked()
+    p["FlashlightDim"] = widget.flashlightdim.value()
+    p["PlayUsername"] = widget.playername.text()
+
+    new("HitErrorMeter", p)
+    g["Show"] = widget.hiterrormeter.isChecked()
+    g["Scale"] = widget.hiterrormeterscale.value()
+    g["Opacity"] = widget.hiterrormeteropacity.value()
+    close(p)
+
+    new("Score", p)
+    g["Show"] = widget.score.isChecked()
+    g["Scale"] = widget.scorescale.value()
+    g["Opacity"] = widget.scoreopacity.value()
+    close(p)
+
+    new("HpBar", p)
+    g["Show"] = widget.hpbar.isChecked()
+    g["Scale"] = widget.hpbarscale.value()
+    g["Opacity"] = widget.hpbaropacity.value()
+    close(p)
+
+    new("ComboCounter", p)
+    g["Show"] = widget.combocounter.isChecked()
+    g["Scale"] = widget.combocounterscale.value()
+    g["Opacity"] = widget.combocounteropacity.value()
+    close(p)
+
+    new("PPCounter", p)
+    g["Show"] = widget.ppcounter.isChecked()
+    g["Scale"] = widget.ppcounterscale.value()
+    g["Opacity"] = widget.ppcounteropacity.value()
+    g["XPosition"] = widget.ppxpos.value()
+    g["YPosition"] = widget.ppypos.value()
+    g["Align"] = widget.ppalign.currentText()
+    close(p)
+
+    new("HitCounter", p)
+    g["Show"] = widget.hitcounter.isChecked()
+    g["Scale"] = widget.hcscale.value()
+    g["Opacity"] = widget.hcopacity.value()
+    g["XPosition"] = widget.hcxpos.value()
+    g["YPosition"] = widget.hcypos.value()
+    g["Align"] = widget.hcalign.currentText()
+    close(p)
+
+    new("KeyOverlay", p)
+    g["Show"] = widget.keyoverlay.isChecked()
+    g["Scale"] = widget.keyoverlayscale.value()
+    g["Opacity"] = widget.keyoverlayopacity.value()
+    close(p)
+
+    new("ScoreBoard", p)
+    g["Show"] = widget.scoreboard.isChecked()
+    g["Scale"] = widget.scoreboardscale.value()
+    g["Opacity"] = widget.scoreboardopacity.value()
+    close(p)
+
+    new("Mods", p)
+    g["Show"] = widget.mods.isChecked()
+    g["Scale"] = widget.modsscale.value()
+    g["Opacity"] = widget.modsopacity.value()
+    close(p)
+
+    new("Boundaries", p)
+    g["Enabled"] = widget.boundaries.isChecked()
+    close(p)
+
+    i["Gameplay"] = p
+
+    p = i["Skin"]
+    p["CurrentSkin"] = widget.skin.text()
+    p["UseColorsFromSkin"] = widget.colorsfromskin.isChecked()
+    p["UseBeatmapColors"] = widget.beatmapcolors.isChecked()
+    new("Cursor", p)
+    g["UseSkinCursor"] = widget.skincursor.isChecked()
+    g["Scale"] = widget.cursorscale.value()
+    close(p)
+    i["Skin"] = p
+
+    p = i["Cursor"]
+    p["TrailStyle"] = widget.trailstyle.value()
+    p["Style23Speed"] = widget.style23speed.value()
+    i["Cursor"] = p
+
+    p = i["Playfield"]
+    n = p["Background"]
+    n["LoadStoryboards"] = widget.loadstoryboards.isChecked()
+    n["LoadVideos"] = widget.loadvideos.isChecked()
+    n["FlashToTheBeat"] = widget.flashtobeat.isChecked()
+
+    new("Dim", n)
+    g["Intro"] = widget.dimintro.value()
+    g["Normal"] = widget.dimnormal.value()
+    g["Breaks"] = widget.dimbreaks.value()
+    close(n)
+
+    new("Parallax", n)
+    g["Amount"] = widget.paralaxamount.value()
+    g["Speed"] = widget.paralaxspeed.value()
+    close(n)
+
+    new("Blur", n)
+    g["Enabled"] = widget.blur.isChecked()
+    g["Values"] = {
+        "Intro": widget.blurintro.value(),
+        "Normal": widget.blurnormal.value(),
+        "Breaks": widget.blurbreaks.value()
+    }
+    close(n)
+
+    new("Triangles", n)
+    g["Enabled"] = widget.triangles.isChecked()
+    g["Shadowed"] = widget.trianglesshadow.isChecked()
+    g["DrawOverBlur"] = widget.trianglesdrawoverblur.isChecked()
+    g["ParallaxMultiplier"] = widget.trianglesparalaxmultiplier.value()
+    g["Density"] = widget.trianglesdensity.value()
+    g["Scale"] = widget.trianglesscale.value()
+    g["Speed"] = widget.trianglesspeed.value()
+    close(n)
+    p["Background"] = n
+
+    new("Logo", p)
+    g["DrawSpectrum"] = widget.drawspectrum.isChecked()
+    g["Dim"] = {
+        "Intro": widget.drawspectrumintro.value(),
+        "Normal": widget.drawspectrumnormal.value(),
+        "Breaks": widget.drawspectrumbreaks.value()
+    }
+    close(p)
+
+    new("Bloom", p)
+    g["Enabled"] = widget.bloom.isChecked()
+    g["BloomToTheBeat"] = widget.bloomtobeat.isChecked()
+    g["BloomBeatAddition"] = widget.bloomtobeatadd.value()
+    g["Threshold"] = widget.bloomthreshold.value()
+    g["Blur"] = widget.bloomblur.value()
+    g["Power"] = widget.bloompower.value()
+    close(p)
+
+    i["Playfield"] = p
+    with open("settings/default.json", "w") as f:
+        i = str(i)
+        i = i.replace("'", '"').replace("True", 'true').replace("False", 'false').replace("\\\\\\\\", "\\\\")
+        f.write(i)
