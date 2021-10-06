@@ -37,7 +37,7 @@ background-color: rgb(211, 211, 211);}
 </string>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="tab_18">
     <attribute name="title">
@@ -1598,7 +1598,7 @@ background-color: gray;
 }</string>
    </property>
    <property name="text">
-    <string>Exit</string>
+    <string>Open</string>
    </property>
   </widget>
   <widget class="QPushButton" name="play">
@@ -2810,6 +2810,19 @@ background-color: gray;
       <number>150</number>
      </property>
     </widget>
+    <widget class="QLabel" name="label_50">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>10</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Align</string>
+     </property>
+    </widget>
     <widget class="QComboBox" name="ppalign">
      <property name="geometry">
       <rect>
@@ -2824,12 +2837,12 @@ background-color: gray;
      </property>
      <item>
       <property name="text">
-       <string>CenterLeft</string>
+       <string>Left</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>CenterRight</string>
+       <string>Right</string>
       </property>
      </item>
      <item>
@@ -2839,12 +2852,12 @@ background-color: gray;
      </item>
      <item>
       <property name="text">
-       <string>UpCenter</string>
+       <string>Up</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>DownCenter</string>
+       <string>Down</string>
       </property>
      </item>
      <item>
@@ -2867,19 +2880,6 @@ background-color: gray;
        <string>DownRight</string>
       </property>
      </item>
-    </widget>
-    <widget class="QLabel" name="label_50">
-     <property name="geometry">
-      <rect>
-       <x>180</x>
-       <y>10</y>
-       <width>31</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Align</string>
-     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_13">
@@ -3166,6 +3166,19 @@ background-color: gray;
       </property>
      </widget>
     </widget>
+    <widget class="QCheckBox" name="checkBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>81</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Align Right</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_16">
     <attribute name="title">
@@ -3340,6 +3353,25 @@ background-color: gray;
       </property>
      </widget>
     </widget>
+    <widget class="QSpinBox" name="hcxpos">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>30</y>
+       <width>121</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>1920</number>
+     </property>
+     <property name="singleStep">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>5</number>
+     </property>
+    </widget>
     <widget class="QComboBox" name="hcalign">
      <property name="geometry">
       <rect>
@@ -3354,12 +3386,12 @@ background-color: gray;
      </property>
      <item>
       <property name="text">
-       <string>CenterLeft</string>
+       <string>Left</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>CenterRight</string>
+       <string>Right</string>
       </property>
      </item>
      <item>
@@ -3369,12 +3401,12 @@ background-color: gray;
      </item>
      <item>
       <property name="text">
-       <string>UpCenter</string>
+       <string>Up</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>DownCenter</string>
+       <string>Down</string>
       </property>
      </item>
      <item>
@@ -3398,7 +3430,102 @@ background-color: gray;
       </property>
      </item>
     </widget>
-    <widget class="QSpinBox" name="hcxpos">
+   </widget>
+   <widget class="QWidget" name="tab_22">
+    <attribute name="title">
+     <string>AimErrorMeter</string>
+    </attribute>
+    <widget class="QGroupBox" name="other_10">
+     <property name="geometry">
+      <rect>
+       <x>560</x>
+       <y>0</y>
+       <width>131</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Other</string>
+     </property>
+     <widget class="QLabel" name="label_75">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>49</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Opacity</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_76">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>31</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Scale</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="aemopacity">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>50</y>
+        <width>62</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>1.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="value">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="aemscale">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>20</y>
+        <width>61</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>5</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QCheckBox" name="aem">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>AimErrorMeter</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="aemxpos">
      <property name="geometry">
       <rect>
        <x>50</x>
@@ -3415,6 +3542,122 @@ background-color: gray;
      </property>
      <property name="value">
       <number>5</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_54">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>10</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Align</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_55">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Ypos</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_56">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Xpos</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="aemalign">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>10</y>
+       <width>81</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="editable">
+      <bool>false</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string>Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Center</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>UpLeft</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DownLeft</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>UpRight</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DownRight</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QSpinBox" name="aemypos">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>60</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>1080</number>
+     </property>
+     <property name="singleStep">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>190</number>
      </property>
     </widget>
    </widget>
@@ -3595,7 +3838,7 @@ background-color: gray;
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../icon.png</pixmap>
+    <pixmap>../0.6.3/icon.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -3625,7 +3868,8 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Made by &lt;a href=&quot;https://github.com/timofey260&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;timofey260&lt;/span&gt;&lt;/a&gt;  2021&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;dancer configurator for &lt;a href=&quot;https://github.com/Wieku/danser-go&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;danser&lt;/span&gt;&lt;/a&gt; 0.6.0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;danser configurator for &lt;a href=&quot;https://github.com/Wieku/danser-go&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;danser&lt;/span&gt;&lt;/a&gt; 0.6.4&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QGroupBox" name="groupBox_3">

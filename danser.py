@@ -3,9 +3,12 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 from danserui import Ui_Dialog as Uid
+
 from os import system
-from pathlib import Path
+from pathlib import Path  # home path
+
 from config import file
+from openfile import openf
 
 home = str(Path.home())
 home = home.replace("\\", "\\\\")
@@ -26,7 +29,7 @@ widget.skins.setText("%s\\\\AppData\\\\Local\\\\osu!\\\\Skins" % home)
 
 
 def bp():
-    exit()
+    openf(widget)
 
 
 def play():
@@ -99,7 +102,6 @@ def text():
     if widget.end.isChecked():
         level += f" -end={widget.ends.value()}"
 
-
     if widget.skip.isChecked():
         level += " -skip"
     if widget.qstart.isChecked():
@@ -131,6 +133,7 @@ def nf():
         widget.sdpf.setChecked(False)
     text()
 
+
 def checked(argument, arguments, invert: bool = True):
     if type(arguments) != list:
         arguments = [arguments]
@@ -149,12 +152,14 @@ def checked(argument, arguments, invert: bool = True):
             for ar in arguments:
                 ar.setDisabled(False)
 
+
 def test():
     checked(widget.bloom, [widget.bloomtobeat, widget.bloomtobeatadd, widget.bloompower, widget.bloomblur,
                            widget.bloomthreshold])
     checked(widget.blur, [widget.blurintro, widget.blurnormal, widget.blurbreaks])
     checked(widget.triangles, [widget.trianglesscale, widget.trianglesspeed, widget.trianglesshadow,
-        widget.trianglesparalaxmultiplier, widget.trianglesdrawoverblur, widget.trianglesdensity])
+                               widget.trianglesparalaxmultiplier, widget.trianglesdrawoverblur,
+                               widget.trianglesdensity])
     checked(widget.knockout, widget.modlist)
 
     checked(widget.start, widget.starts)  # timing

@@ -2,6 +2,7 @@ import json
 
 name = ''
 g = {}
+openfile = "settings/default.json"
 
 
 def new(n: str, p):
@@ -17,7 +18,7 @@ def close(p):
 
 def file(widget):
     global g, name
-    i = json.loads(open("settings/default.json", "r").read())
+    i = json.loads(open(openfile, "r").read())
 
     p = i["General"]
     p["OsuSongsDir"] = widget.songs.text()
@@ -71,6 +72,16 @@ def file(widget):
     g["Show"] = widget.hiterrormeter.isChecked()
     g["Scale"] = widget.hiterrormeterscale.value()
     g["Opacity"] = widget.hiterrormeteropacity.value()
+
+    close(p)
+
+    new("AimErrorMeter", p)
+    g["Show"] = widget.aem.isChecked()
+    g["Scale"] = widget.aemscale.value()
+    g["Opacity"] = widget.aemopacity.value()
+    g["Align"] = widget.aemalign.currentText()
+    g["XPosition"] = widget.aemxpos.value()
+    g["YPosition"] = widget.aemypos.value()
     close(p)
 
     new("Score", p)
@@ -204,7 +215,7 @@ def file(widget):
     close(p)
 
     i["Playfield"] = p
-    with open("settings/default.json", "w") as f:
+    with open(openfile, "w") as f:
         i = str(i)
         i = i.replace("'", '"').replace("True", 'true').replace("False", 'false').replace("\\\\\\\\", "\\\\")
         f.write(i)
