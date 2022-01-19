@@ -1102,6 +1102,7 @@ class Ui_Dialog(object):
         self.textEdit.setEnabled(True)
         self.textEdit.setGeometry(QRect(10, 20, 321, 111))
         self.textEdit.setReadOnly(True)
+        self.textEdit.setTextInteractionFlags(Qt.TextBrowserInteraction)
         self.groupBox_3 = QGroupBox(Dialog)
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.groupBox_3.setGeometry(QRect(340, 590, 351, 131))
@@ -1147,11 +1148,20 @@ class Ui_Dialog(object):
         self.cursorsc = QSpinBox(self.groupBox_3)
         self.cursorsc.setObjectName(u"cursorsc")
         self.cursorsc.setGeometry(QRect(80, 100, 42, 22))
+        self.record = QCheckBox(self.groupBox_3)
+        self.record.setObjectName(u"record")
+        self.record.setGeometry(QRect(130, 80, 61, 16))
+        self.debug = QCheckBox(self.groupBox_3)
+        self.debug.setObjectName(u"debug")
+        self.debug.setGeometry(QRect(130, 100, 61, 16))
+        self.gldebug = QCheckBox(self.groupBox_3)
+        self.gldebug.setObjectName(u"gldebug")
+        self.gldebug.setGeometry(QRect(200, 80, 71, 16))
 
         self.retranslateUi(Dialog)
 
         self.settings.setCurrentIndex(3)
-        self.overlay.setCurrentIndex(9)
+        self.overlay.setCurrentIndex(10)
 
 
         QMetaObject.connectSlotsByName(Dialog)
@@ -1454,7 +1464,7 @@ class Ui_Dialog(object):
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; m"
                         "argin-right:0px; -qt-block-indent:0; text-indent:0px;\">Made by <a href=\"https://github.com/timofey260\"><span style=\" text-decoration: underline; color:#0000ff;\">timofey260</span></a>  2021</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">danser configurator for <a href=\"https://github.com/Wieku/danser-go\"><span style=\" text-decoration: underline; color:#0000ff;\">danser</span></a> 0.6.4</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">danser configurator for <a href=\"https://github.com/Wieku/danser-go\"><span style=\" text-decoration: underline; color:#0000ff;\">danser</span></a> 0.6.7</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("Dialog", u"launch", None))
         self.title.setText(QCoreApplication.translate("Dialog", u"Title", None))
@@ -1465,5 +1475,17 @@ class Ui_Dialog(object):
         self.qstart.setText(QCoreApplication.translate("Dialog", u"Quick start", None))
         self.tag.setText(QCoreApplication.translate("Dialog", u"Tag", None))
         self.cursors.setText(QCoreApplication.translate("Dialog", u"Cursors", None))
+#if QT_CONFIG(tooltip)
+        self.record.setToolTip(QCoreApplication.translate("Dialog", u"Records a video", None))
+#endif // QT_CONFIG(tooltip)
+        self.record.setText(QCoreApplication.translate("Dialog", u"Record", None))
+#if QT_CONFIG(tooltip)
+        self.debug.setToolTip(QCoreApplication.translate("Dialog", u"Show info about map and rendering engine, overrides Graphics.ShowFPS setting", None))
+#endif // QT_CONFIG(tooltip)
+        self.debug.setText(QCoreApplication.translate("Dialog", u"Debug", None))
+#if QT_CONFIG(tooltip)
+        self.gldebug.setToolTip(QCoreApplication.translate("Dialog", u"Turns on OpenGL debug logging, may reduce performance heavily", None))
+#endif // QT_CONFIG(tooltip)
+        self.gldebug.setText(QCoreApplication.translate("Dialog", u"Gldebug", None))
     # retranslateUi
 

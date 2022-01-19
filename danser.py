@@ -62,6 +62,12 @@ def text():
         level += " -tag=" + str(widget.tagc.value())
     if widget.cursors.isChecked():
         level += " -cursors=" + str(widget.cursorsc.value())
+    if widget.record.isChecked():
+        level += " -record"
+    if widget.debug.isChecked():
+        level += " -debug"
+    if widget.gldebug.isChecked():
+        level += " -gldebug"
 
     if widget.knockout.isChecked():  # knockout mods
         mods = ""
@@ -194,6 +200,10 @@ widget.vsync.clicked.connect(test)
 
 widget.skip.clicked.connect(text)
 widget.qstart.clicked.connect(text)
+widget.debug.clicked.connect(text)
+widget.gldebug.clicked.connect(text)
+widget.record.clicked.connect(text)
+
 # title
 widget.author.clicked.connect(test)
 widget.difficulty.clicked.connect(test)
